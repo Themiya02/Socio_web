@@ -4,7 +4,7 @@ import ThemeToggle from "../components/ui/ThemeToggle";
 import AuthHeader from "../components/auth/AuthHeader";
 import SignupForm from "../components/auth/SignupForm";
 
-export default function SignupPage() {
+export default function SignupPage({ onSwitchToLogin }) {
   const { isDark, toggleDarkMode } = useDarkMode();
 
   return (
@@ -21,7 +21,7 @@ export default function SignupPage() {
       {/* Center Signup Card */}
       <main className="relative z-10 w-full max-w-[440px] rounded-3xl shadow-2xl overflow-hidden border border-white/20 dark:border-slate-800">
         <AuthHeader />
-        <SignupForm />
+        <SignupForm onSwitchToLogin={onSwitchToLogin} />
       </main>
     </div>
   );

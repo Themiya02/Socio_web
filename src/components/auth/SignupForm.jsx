@@ -4,7 +4,7 @@ import PasswordStrength from "../ui/PasswordStrength";
 import Button from "../ui/Button";
 import SocialButton from "./SocialButton";
 
-export default function SignupForm() {
+export default function SignupForm({ onSwitchToLogin }) {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -148,14 +148,18 @@ export default function SignupForm() {
       </div>
 
       {/* Google Signup */}
-      <SocialButton onClick={() => console.log("Google Sign Up Clicked")} />
+      <SocialButton label="Sign up with Google" onClick={() => console.log("Google Sign Up Clicked")} />
 
       {/* Footer Link */}
       <p className="text-center text-xs text-slate-600 dark:text-slate-400 mt-5">
         Already have an account?{" "}
-        <a href="#" className="text-blue-600 dark:text-blue-400 font-semibold hover:underline">
+        <button
+       type="button"
+       onClick={onSwitchToLogin}
+       className="text-blue-600 dark:text-blue-400 font-semibold hover:underline cursor-pointer"
+     >
           Sign In
-        </a>
+        </button>
       </p>
     </div>
   );
