@@ -1,6 +1,6 @@
-import socioLogo from "../../assets/icons/socio-logo.jpg"; // ඔයාගේ file name/extension එක හරියටම තියාගන්න
+import socioLogo from "../../assets/icons/socio-logo.jpg";
 
-export default function AuthHeader() {
+export default function AuthCardHeader() {
   return (
     <div className="bg-black py-5 px-6 flex items-center justify-center">
       <img

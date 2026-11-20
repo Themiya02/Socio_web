@@ -1,7 +1,7 @@
 import { useState } from "react";
 import InputField from "../ui/InputField";
-import Button from "../ui/Button";
-import SocialButton from "./SocialButton";
+import Button from "../common/Button";
+import IconButton from "../common/IconButton";
 
 export default function LoginForm({ onSwitchToSignup }) {
   const [formData, setFormData] = useState({
@@ -94,7 +94,7 @@ export default function LoginForm({ onSwitchToSignup }) {
       </div>
 
       {/* Continue with Google Button */}
-      <SocialButton
+      <IconButton
         label="Continue with Google"
         onClick={() => console.log("Continue with Google Clicked")}
       />

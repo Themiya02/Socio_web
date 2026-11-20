@@ -1,9 +1,8 @@
 import { useState } from "react";
 import InputField from "../ui/InputField";
 import PasswordStrength from "../ui/PasswordStrength";
-import Button from "../ui/Button";
-import SocialButton from "./SocialButton";
-
+import Button from "../common/Button";
+import IconButton from "../common/IconButton";
 export default function SignupForm({ onSwitchToLogin }) {
   const [formData, setFormData] = useState({
     firstName: "",
@@ -148,7 +147,7 @@ export default function SignupForm({ onSwitchToLogin }) {
       </div>
 
       {/* Google Signup */}
-      <SocialButton label="Sign up with Google" onClick={() => console.log("Google Sign Up Clicked")} />
+      <IconButton label="Sign up with Google" onClick={() => console.log("Google Sign Up Clicked")} />
 
       {/* Footer Link */}
       <p className="text-center text-xs text-slate-600 dark:text-slate-400 mt-5">
