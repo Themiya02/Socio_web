@@ -2,6 +2,7 @@ import { useState } from "react";
 import InputField from "../ui/InputField";
 import Button from "../common/Button";
 import IconButton from "../common/IconButton";
+import { validateLoginField, validateLoginForm } from "../../utils/validation";
 
 export default function LoginForm({ onSwitchToSignup }) {
   const [formData, setFormData] = useState({
@@ -10,33 +11,61 @@ export default function LoginForm({ onSwitchToSignup }) {
     rememberMe: false,
   });
 
+  const [errors, setErrors] = useState({});
+  const [touched, setTouched] = useState({});
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
+    const fieldValue = type === "checkbox" ? checked : value;
+
     setFormData((prev) => ({
       ...prev,
-      [name]: type === "checkbox" ? checked : value,
+      [name]: fieldValue,
+    }));
+
+    if (touched[name]) {
+      setErrors((prev) => ({
+        ...prev,
+        [name]: validateLoginField(name, fieldValue),
+      }));
+    }
+  };
+
+  const handleBlur = (e) => {
+    const { name, value } = e.target;
+    setTouched((prev) => ({ ...prev, [name]: true }));
+    setErrors((prev) => ({
+      ...prev,
+      [name]: validateLoginField(name, value),
     }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Login Submitted:", formData);
+
+    const validationErrors = validateLoginForm(formData);
+    setErrors(validationErrors);
+    setTouched({ email: true, password: true });
+
+    if (Object.keys(validationErrors).length > 0) return;
+
+    console.log("Valid Login Submitted:", formData);
   };
 
   return (
-    <div className="p-5 sm:p-7 bg-white dark:bg-slate-900 transition-colors duration-300">
+    <div className="p-5 sm:p-7 md:p-8 bg-white dark:bg-slate-900 transition-colors duration-300">
       {/* Title & Subtitle */}
       <div className="text-center mb-6">
         <h1 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">
           Welcome back
         </h1>
-        <p className="text-xs text-slate-500 dark:text-slate-200 mt-1">
+        <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-200 mt-1">
           Sign in to continue shopping
         </p>
       </div>
 
       {/* Form */}
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} noValidate className="space-y-4">
         <InputField
           label="Email Address"
           type="email"
@@ -44,6 +73,8 @@ export default function LoginForm({ onSwitchToSignup }) {
           placeholder="name@company.com"
           value={formData.email}
           onChange={handleChange}
+          onBlur={handleBlur}
+          error={errors.email}
           required
         />
 
@@ -54,11 +85,13 @@ export default function LoginForm({ onSwitchToSignup }) {
           placeholder="Enter your password"
           value={formData.password}
           onChange={handleChange}
+          onBlur={handleBlur}
+          error={errors.password}
           required
         />
 
         {/* Remember me & Forgot password Row */}
-        <div className="flex items-center justify-between gap-2 pt-0.5">
+        <div className="flex flex-wrap items-center justify-between gap-2 pt-0.5">
           <label className="flex items-center gap-2 cursor-pointer">
             <input
               type="checkbox"
@@ -67,7 +100,7 @@ export default function LoginForm({ onSwitchToSignup }) {
               onChange={handleChange}
               className="w-4 h-4 rounded border-slate-300 dark:border-slate-600 text-blue-600 focus:ring-blue-500"
             />
-            <span className="text-xs text-slate-400 dark:text-slate-200">
+            <span className="text-xs text-slate-600 dark:text-slate-200">
               Remember me
             </span>
           </label>
@@ -80,7 +113,6 @@ export default function LoginForm({ onSwitchToSignup }) {
           </a>
         </div>
 
-        {/* Sign In Button */}
         <div className="pt-1">
           <Button type="submit">Sign In</Button>
         </div>
@@ -89,7 +121,9 @@ export default function LoginForm({ onSwitchToSignup }) {
       {/* OR Divider */}
       <div className="flex items-center gap-3 my-5">
         <div className="h-px flex-1 bg-slate-200 dark:bg-slate-700" />
-        <span className="text-[11px] font-medium text-slate-400 uppercase">OR</span>
+        <span className="text-[11px] font-medium text-slate-400 dark:text-slate-200 uppercase">
+          OR
+        </span>
         <div className="h-px flex-1 bg-slate-200 dark:bg-slate-700" />
       </div>
 

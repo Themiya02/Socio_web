@@ -3,6 +3,8 @@ import InputField from "../ui/InputField";
 import PasswordStrength from "../ui/PasswordStrength";
 import Button from "../common/Button";
 import IconButton from "../common/IconButton";
+import { validateSignupField, validateSignupForm } from "../../utils/validation";
+
 export default function SignupForm({ onSwitchToLogin }) {
   const [formData, setFormData] = useState({
     firstName: "",
@@ -14,29 +16,73 @@ export default function SignupForm({ onSwitchToLogin }) {
     agreeTerms: false,
   });
 
+  const [errors, setErrors] = useState({});
+  const [touched, setTouched] = useState({});
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setFormData((prev) => ({
+    const fieldValue = type === "checkbox" ? checked : value;
+
+    const updatedData = {
+      ...formData,
+      [name]: fieldValue,
+    };
+    setFormData(updatedData);
+
+    // දැනටමත් touch කරපු field එකක් නම් type කරද්දීම live validate කරනවා
+    if (touched[name]) {
+      setErrors((prev) => ({
+        ...prev,
+        [name]: validateSignupField(name, fieldValue, updatedData),
+      }));
+    }
+
+    // Password එක වෙනස් කළොත්, Confirm Password එකත් match වෙනවද කියලා බලනවා
+    if (name === "password" && touched.confirmPassword) {
+      setErrors((prev) => ({
+        ...prev,
+        confirmPassword: validateSignupField(
+          "confirmPassword",
+          updatedData.confirmPassword,
+          updatedData
+        ),
+      }));
+    }
+  };
+
+  const handleBlur = (e) => {
+    const { name, value, type, checked } = e.target;
+    const fieldValue = type === "checkbox" ? checked : value;
+
+    setTouched((prev) => ({ ...prev, [name]: true }));
+    setErrors((prev) => ({
       ...prev,
-      [name]: type === "checkbox" ? checked : value,
+      [name]: validateSignupField(name, fieldValue, formData),
     }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (formData.password !== formData.confirmPassword) {
-      alert("Passwords do not match!");
-      return;
-    }
-    if (!formData.agreeTerms) {
-      alert("Please agree to the Terms & Conditions.");
-      return;
-    }
-    console.log("Form Submitted:", formData);
+
+    const validationErrors = validateSignupForm(formData);
+    setErrors(validationErrors);
+    setTouched({
+      firstName: true,
+      lastName: true,
+      phone: true,
+      email: true,
+      password: true,
+      confirmPassword: true,
+      agreeTerms: true,
+    });
+
+    if (Object.keys(validationErrors).length > 0) return;
+
+    console.log("Valid Signup Submitted:", formData);
   };
 
   return (
-    <div className="p-6 sm:p-8 bg-white dark:bg-slate-900 transition-colors duration-300">
+    <div className="p-5 sm:p-7 md:p-8 bg-white dark:bg-slate-900 transition-colors duration-300">
       {/* Title & Subtitle */}
       <div className="text-center mb-6">
         <h1 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">
@@ -47,9 +93,8 @@ export default function SignupForm({ onSwitchToLogin }) {
         </p>
       </div>
 
-      {/* Form */}
-      <form onSubmit={handleSubmit} className="space-y-3.5">
-        {/* Responsive Row: Mobile වලදී 1 col, Tablet/Desktop වලදී 2 cols */}
+      {/* Form (noValidate නිසා browser එකේ කැත bubbles එන්නේ නෑ) */}
+      <form onSubmit={handleSubmit} noValidate className="space-y-3.5">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-3">
           <InputField
             label="First Name"
@@ -57,6 +102,8 @@ export default function SignupForm({ onSwitchToLogin }) {
             placeholder="John"
             value={formData.firstName}
             onChange={handleChange}
+            onBlur={handleBlur}
+            error={errors.firstName}
             required
           />
           <InputField
@@ -65,6 +112,8 @@ export default function SignupForm({ onSwitchToLogin }) {
             placeholder="Perera"
             value={formData.lastName}
             onChange={handleChange}
+            onBlur={handleBlur}
+            error={errors.lastName}
             required
           />
         </div>
@@ -76,6 +125,8 @@ export default function SignupForm({ onSwitchToLogin }) {
           placeholder="+94 77 123 4567"
           value={formData.phone}
           onChange={handleChange}
+          onBlur={handleBlur}
+          error={errors.phone}
           required
         />
 
@@ -86,6 +137,8 @@ export default function SignupForm({ onSwitchToLogin }) {
           placeholder="you@example.com"
           value={formData.email}
           onChange={handleChange}
+          onBlur={handleBlur}
+          error={errors.email}
           required
         />
 
@@ -97,6 +150,8 @@ export default function SignupForm({ onSwitchToLogin }) {
             placeholder="Min. 8 characters"
             value={formData.password}
             onChange={handleChange}
+            onBlur={handleBlur}
+            error={errors.password}
             required
           />
           <PasswordStrength password={formData.password} />
@@ -109,31 +164,46 @@ export default function SignupForm({ onSwitchToLogin }) {
           placeholder="Re-enter your password"
           value={formData.confirmPassword}
           onChange={handleChange}
+          onBlur={handleBlur}
+          error={errors.confirmPassword}
           required
         />
 
-        {/* Terms Checkbox */}
-        <label className="flex items-start gap-2.5 pt-1 cursor-pointer">
-          <input
-            type="checkbox"
-            name="agreeTerms"
-            checked={formData.agreeTerms}
-            onChange={handleChange}
-            className="mt-0.5 w-4 h-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500"
-          />
-          <span className="text-xs text-slate-600 dark:text-slate-200 leading-tight">
-            I agree to the{" "}
-            <a href="#" className="text-blue-600 dark:text-blue-200 hover:underline font-medium">
-              Terms & Conditions
-            </a>{" "}
-            and{" "}
-            <a href="#" className="text-blue-600 dark:text-blue-200 hover:underline font-medium">
-              Privacy Policy
-            </a>
-          </span>
-        </label>
+        {/* Terms Checkbox + Inline Error */}
+        <div>
+          <label className="flex items-start gap-2.5 pt-1 cursor-pointer">
+            <input
+              type="checkbox"
+              name="agreeTerms"
+              checked={formData.agreeTerms}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              className="mt-0.5 w-4 h-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500"
+            />
+            <span className="text-xs text-slate-600 dark:text-slate-200 leading-tight">
+              I agree to the{" "}
+              <a
+                href="#"
+                className="text-blue-600 dark:text-blue-400 hover:underline font-medium"
+              >
+                Terms & Conditions
+              </a>{" "}
+              and{" "}
+              <a
+                href="#"
+                className="text-blue-600 dark:text-blue-400 hover:underline font-medium"
+              >
+                Privacy Policy
+              </a>
+            </span>
+          </label>
+          {errors.agreeTerms && (
+            <p className="text-xs text-red-600 dark:text-red-400 mt-1">
+              {errors.agreeTerms}
+            </p>
+          )}
+        </div>
 
-        {/* Create Account Button */}
         <div className="pt-1">
           <Button type="submit">Create Account</Button>
         </div>
@@ -142,21 +212,26 @@ export default function SignupForm({ onSwitchToLogin }) {
       {/* OR Divider */}
       <div className="flex items-center gap-3 my-4">
         <div className="h-px flex-1 bg-slate-200 dark:bg-slate-700" />
-        <span className="text-[11px] font-medium text-slate-400 uppercase">OR</span>
+        <span className="text-[11px] font-medium text-slate-400 dark:text-slate-200 uppercase">
+          OR
+        </span>
         <div className="h-px flex-1 bg-slate-200 dark:bg-slate-700" />
       </div>
 
       {/* Google Signup */}
-      <IconButton label="Sign up with Google" onClick={() => console.log("Google Sign Up Clicked")} />
+      <IconButton
+        label="Sign up with Google"
+        onClick={() => console.log("Google Sign Up Clicked")}
+      />
 
       {/* Footer Link */}
       <p className="text-center text-xs text-slate-600 dark:text-slate-200 mt-5">
         Already have an account?{" "}
         <button
-       type="button"
-       onClick={onSwitchToLogin}
-       className="text-blue-600 dark:text-blue-200 font-semibold hover:underline cursor-pointer"
-     >
+          type="button"
+          onClick={onSwitchToLogin}
+          className="text-blue-600 dark:text-blue-400 font-semibold hover:underline cursor-pointer"
+        >
           Sign In
         </button>
       </p>
