@@ -50,7 +50,7 @@ export default function SignupForm({ onSwitchToLogin }) {
       {/* Form */}
       <form onSubmit={handleSubmit} className="space-y-3.5">
         {/* Responsive Row: Mobile වලදී 1 col, Tablet/Desktop වලදී 2 cols */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-3">
           <InputField
             label="First Name"
             name="firstName"

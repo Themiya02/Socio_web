@@ -24,7 +24,7 @@ export default function LoginForm({ onSwitchToSignup }) {
   };
 
   return (
-    <div className="p-6 sm:p-8 bg-white dark:bg-slate-900 transition-colors duration-300">
+    <div className="p-5 sm:p-7 bg-white dark:bg-slate-900 transition-colors duration-300">
       {/* Title & Subtitle */}
       <div className="text-center mb-6">
         <h1 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">
@@ -58,7 +58,7 @@ export default function LoginForm({ onSwitchToSignup }) {
         />
 
         {/* Remember me & Forgot password Row */}
-        <div className="flex items-center justify-between pt-0.5">
+        <div className="flex items-center justify-between gap-2 pt-0.5">
           <label className="flex items-center gap-2 cursor-pointer">
             <input
               type="checkbox"
