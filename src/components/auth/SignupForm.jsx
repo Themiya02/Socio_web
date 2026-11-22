@@ -29,7 +29,7 @@ export default function SignupForm({ onSwitchToLogin }) {
     };
     setFormData(updatedData);
 
-    // දැනටමත් touch කරපු field එකක් නම් type කරද්දීම live validate කරනවා
+    //  live validate
     if (touched[name]) {
       setErrors((prev) => ({
         ...prev,
@@ -37,7 +37,7 @@ export default function SignupForm({ onSwitchToLogin }) {
       }));
     }
 
-    // Password එක වෙනස් කළොත්, Confirm Password එකත් match වෙනවද කියලා බලනවා
+    // Password  Confirm Password  match 
     if (name === "password" && touched.confirmPassword) {
       setErrors((prev) => ({
         ...prev,
@@ -93,7 +93,7 @@ export default function SignupForm({ onSwitchToLogin }) {
         </p>
       </div>
 
-      {/* Form (noValidate නිසා browser එකේ කැත bubbles එන්නේ නෑ) */}
+      {/* Form (noValidate browser bubbles not comming ) */}
       <form onSubmit={handleSubmit} noValidate className="space-y-3.5">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-3">
           <InputField

@@ -1,5 +1,5 @@
 export default function PasswordStrength({ password = "" }) {
-  // Password length එක අනුව strength level එක (0 සිට 3 දක්වා)
+  // Password length  strength level  (0 to 3 )
   const getStrength = () => {
     if (!password) return 0;
     let score = 0;
