@@ -1,4 +1,4 @@
-import googleIcon from "../../../assets/icons/google-icon.jpg";
+import googleIcon from "../../../assets/icons/google-icon.webp";
 
 export default function IconButton({
   onClick,

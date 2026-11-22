@@ -1,4 +1,4 @@
-import socioLogo from "../../assets/icons/socio-logo.jpg";
+import socioLogo from "../../assets/icons/socio-logo.webp";
 
 export default function AuthCardHeader() {
   return (
