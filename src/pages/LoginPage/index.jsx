@@ -1,11 +1,14 @@
+import { useState } from "react";
 import bgTech from "../../assets/images/bg-tech.jpg";
 import { useDarkMode } from "../../hooks/useDarkMode";
 import ThemeToggle from "../../components/ui/ThemeToggle";
 import AuthCardHeader from "../../components/auth/AuthCardHeader";
 import LoginForm from "../../components/auth/LoginForm";
+import ForgotPasswordModal from "../../components/auth/ForgotPasswordModal";
 
 export default function LoginPage({ onSwitchToSignup }) {
   const { isDark, toggleDarkMode } = useDarkMode();
+  const [isForgotOpen, setIsForgotOpen] = useState(false);
 
   return (
     <div
@@ -17,8 +20,17 @@ export default function LoginPage({ onSwitchToSignup }) {
 
       <main className="relative z-10 my-auto w-full max-w-[360px] sm:max-w-[390px] md:max-w-[400px] rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden border border-white/20 dark:border-slate-800">
         <AuthCardHeader />
-        <LoginForm onSwitchToSignup={onSwitchToSignup} />
+        <LoginForm
+          onSwitchToSignup={onSwitchToSignup}
+          onForgotPassword={() => setIsForgotOpen(true)}
+        />
       </main>
+
+      {/* Forgot Password Popup Modal */}
+      <ForgotPasswordModal
+        isOpen={isForgotOpen}
+        onClose={() => setIsForgotOpen(false)}
+      />
     </div>
   );
 }

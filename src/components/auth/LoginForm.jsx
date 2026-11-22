@@ -4,7 +4,7 @@ import Button from "../common/Button";
 import IconButton from "../common/IconButton";
 import { validateLoginField, validateLoginForm } from "../../utils/validation";
 
-export default function LoginForm({ onSwitchToSignup }) {
+export default function LoginForm({ onSwitchToSignup, onForgotPassword }) {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -105,12 +105,14 @@ export default function LoginForm({ onSwitchToSignup }) {
             </span>
           </label>
 
-          <a
-            href="#"
-            className="text-xs font-medium text-blue-600 dark:text-blue-400 hover:underline"
-          >
+          <button
+              type="button"
+              onClick={onForgotPassword}
+               className="text-xs font-medium text-blue-600 dark:text-blue-400 hover:underline cursor-pointer"
+>
             Forgot password?
-          </a>
+          </button>
+          
         </div>
 
         <div className="pt-1">
