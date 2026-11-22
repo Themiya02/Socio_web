@@ -30,7 +30,7 @@ export default function LoginForm({ onSwitchToSignup }) {
         <h1 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">
           Welcome back
         </h1>
-        <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+        <p className="text-xs text-slate-500 dark:text-slate-200 mt-1">
           Sign in to continue shopping
         </p>
       </div>
@@ -67,7 +67,7 @@ export default function LoginForm({ onSwitchToSignup }) {
               onChange={handleChange}
               className="w-4 h-4 rounded border-slate-300 dark:border-slate-600 text-blue-600 focus:ring-blue-500"
             />
-            <span className="text-xs text-slate-600 dark:text-slate-400">
+            <span className="text-xs text-slate-400 dark:text-slate-200">
               Remember me
             </span>
           </label>
@@ -100,7 +100,7 @@ export default function LoginForm({ onSwitchToSignup }) {
       />
 
       {/* Footer Link */}
-      <p className="text-center text-xs text-slate-600 dark:text-slate-400 mt-5">
+      <p className="text-center text-xs text-slate-600 dark:text-slate-200 mt-5">
         Don't have an account?{" "}
         <button
           type="button"

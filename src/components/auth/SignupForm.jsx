@@ -42,7 +42,7 @@ export default function SignupForm({ onSwitchToLogin }) {
         <h1 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">
           Create Your Account
         </h1>
-        <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
+        <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-200 mt-1">
           Join the community for exclusive tech deals
         </p>
       </div>
@@ -121,13 +121,13 @@ export default function SignupForm({ onSwitchToLogin }) {
             onChange={handleChange}
             className="mt-0.5 w-4 h-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500"
           />
-          <span className="text-xs text-slate-600 dark:text-slate-400 leading-tight">
+          <span className="text-xs text-slate-600 dark:text-slate-200 leading-tight">
             I agree to the{" "}
-            <a href="#" className="text-blue-600 dark:text-blue-400 hover:underline font-medium">
+            <a href="#" className="text-blue-600 dark:text-blue-200 hover:underline font-medium">
               Terms & Conditions
             </a>{" "}
             and{" "}
-            <a href="#" className="text-blue-600 dark:text-blue-400 hover:underline font-medium">
+            <a href="#" className="text-blue-600 dark:text-blue-200 hover:underline font-medium">
               Privacy Policy
             </a>
           </span>
@@ -150,12 +150,12 @@ export default function SignupForm({ onSwitchToLogin }) {
       <IconButton label="Sign up with Google" onClick={() => console.log("Google Sign Up Clicked")} />
 
       {/* Footer Link */}
-      <p className="text-center text-xs text-slate-600 dark:text-slate-400 mt-5">
+      <p className="text-center text-xs text-slate-600 dark:text-slate-200 mt-5">
         Already have an account?{" "}
         <button
        type="button"
        onClick={onSwitchToLogin}
-       className="text-blue-600 dark:text-blue-400 font-semibold hover:underline cursor-pointer"
+       className="text-blue-600 dark:text-blue-200 font-semibold hover:underline cursor-pointer"
      >
           Sign In
         </button>
