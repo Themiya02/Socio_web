@@ -15,7 +15,7 @@ export default function LoginPage({ onSwitchToSignup }) {
       <div className="absolute inset-0 bg-white/10 pointer-events-none" />
       <ThemeToggle isDark={isDark} onToggle={toggleDarkMode} />
 
-      <main className="relative z-10 my-auto w-full max-w-[400px] sm:max-w-[440px] lg:max-w-[460px] rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden border border-white/20 dark:border-slate-800">
+      <main className="relative z-10 my-auto w-full max-w-[360px] sm:max-w-[390px] md:max-w-[400px] rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden border border-white/20 dark:border-slate-800">
         <AuthCardHeader />
         <LoginForm onSwitchToSignup={onSwitchToSignup} />
       </main>

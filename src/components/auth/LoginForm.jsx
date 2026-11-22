@@ -53,19 +53,19 @@ export default function LoginForm({ onSwitchToSignup }) {
   };
 
   return (
-    <div className="p-5 sm:p-7 md:p-8 bg-white dark:bg-slate-900 transition-colors duration-300">
+    <div className="p-5 sm:p-6  bg-white dark:bg-slate-900 transition-colors duration-300">
       {/* Title & Subtitle */}
-      <div className="text-center mb-6">
-        <h1 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">
+      <div className="text-center mb-4 sm:mb-5">
+        <h1 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
           Welcome back
         </h1>
-        <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-200 mt-1">
+        <p className="text-x text-slate-500 dark:text-slate-200 mt-1">
           Sign in to continue shopping
         </p>
       </div>
 
       {/* Form */}
-      <form onSubmit={handleSubmit} noValidate className="space-y-4">
+      <form onSubmit={handleSubmit} noValidate className="space-y-3">
         <InputField
           label="Email Address"
           type="email"
@@ -119,7 +119,7 @@ export default function LoginForm({ onSwitchToSignup }) {
       </form>
 
       {/* OR Divider */}
-      <div className="flex items-center gap-3 my-5">
+      <div className="flex items-center gap-3 my-3.5">
         <div className="h-px flex-1 bg-slate-200 dark:bg-slate-700" />
         <span className="text-[11px] font-medium text-slate-400 dark:text-slate-200 uppercase">
           OR
@@ -134,7 +134,7 @@ export default function LoginForm({ onSwitchToSignup }) {
       />
 
       {/* Footer Link */}
-      <p className="text-center text-xs text-slate-600 dark:text-slate-200 mt-5">
+      <p className="text-center text-xs text-slate-600 dark:text-slate-200 mt-4">
         Don't have an account?{" "}
         <button
           type="button"

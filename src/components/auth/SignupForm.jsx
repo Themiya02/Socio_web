@@ -82,19 +82,19 @@ export default function SignupForm({ onSwitchToLogin }) {
   };
 
   return (
-    <div className="p-5 sm:p-7 md:p-8 bg-white dark:bg-slate-900 transition-colors duration-300">
+    <div className="p-5 sm:p-6  bg-white dark:bg-slate-900 transition-colors duration-300">
       {/* Title & Subtitle */}
       <div className="text-center mb-6">
-        <h1 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">
+        <h1 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
           Create Your Account
         </h1>
-        <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-200 mt-1">
+        <p className="text-x text-slate-500 dark:text-slate-200 mt-1">
           Join the community for exclusive tech deals
         </p>
       </div>
 
       {/* Form (noValidate browser bubbles not comming ) */}
-      <form onSubmit={handleSubmit} noValidate className="space-y-3.5">
+      <form onSubmit={handleSubmit} noValidate className="space-y-3">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-3">
           <InputField
             label="First Name"
@@ -210,7 +210,7 @@ export default function SignupForm({ onSwitchToLogin }) {
       </form>
 
       {/* OR Divider */}
-      <div className="flex items-center gap-3 my-4">
+      <div className="flex items-center gap-3 my-3.5">
         <div className="h-px flex-1 bg-slate-200 dark:bg-slate-700" />
         <span className="text-[11px] font-medium text-slate-400 dark:text-slate-200 uppercase">
           OR
@@ -225,7 +225,7 @@ export default function SignupForm({ onSwitchToLogin }) {
       />
 
       {/* Footer Link */}
-      <p className="text-center text-xs text-slate-600 dark:text-slate-200 mt-5">
+      <p className="text-center text-xs text-slate-600 dark:text-slate-200 mt-4">
         Already have an account?{" "}
         <button
           type="button"

@@ -36,7 +36,7 @@ export default function InputField({
           placeholder={placeholder}
           required={required}
           aria-invalid={Boolean(error)}
-          className={`w-full pl-3.5 pr-10 py-2.5 text-base sm:text-sm rounded-xl bg-slate-50 dark:bg-slate-800/80 border text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-300 focus:outline-none focus:ring-2 transition-all ${
+          className={`w-full pl-3.5 pr-10 py-2 text-base sm:text-sm rounded-xl bg-slate-50 dark:bg-slate-800/80 border text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-300 focus:outline-none focus:ring-2 transition-all ${
             error
               ? "border-red-500 dark:border-red-400 focus:ring-red-500/30 focus:border-red-500"
               : "border-slate-200 dark:border-slate-700 focus:ring-blue-500/40 focus:border-blue-500"
