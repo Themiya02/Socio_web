@@ -4,6 +4,7 @@ import { Search, ShoppingCart, Menu, X } from "lucide-react";
 import socioLogoBlack from "../../../assets/icons/socio-logo-dark.webp";
 import careSlogan from "../../../assets/icons/Slogen.webp";
 import Button from "../../common/Button";
+import Container from "../../common/Container";
 
 export default function Navbar({ cartCount = 3 }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -19,7 +20,7 @@ export default function Navbar({ cartCount = 3 }) {
 
   return (
     <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-[0_2px_10px_rgba(15,23,42,0.06)]">
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-[70px] flex items-center justify-between gap-4">
+      <Container className="relative h-16 sm:h-[70px] flex items-center justify-between gap-4">
 
         {/* Brand Logo Group: Public Icon + Black Wordmark + Slogan */}
         <Link to="/" className="shrink-0 flex items-center gap-2.5">
@@ -103,7 +104,7 @@ export default function Navbar({ cartCount = 3 }) {
             {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
-      </div>
+      </Container>
 
       {/* Mobile Dropdown Menu */}
       {mobileMenuOpen && (

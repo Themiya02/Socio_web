@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { MapPin, Phone, Mail } from "lucide-react";
+import { Building2, MapPin, Phone, Mail } from "lucide-react";
 import socioLogo from "../../../assets/icons/socio-logo.webp";
 import { FOOTER_LINKS } from "../../../data/mockData";
 import Button from "../../common/Button";
+import Container from "../../common/Container";
 
 const SOCIAL_LINKS = [
   {
@@ -69,17 +70,21 @@ export default function Footer() {
 
   return (
     <footer id="footer" className="bg-black text-white pt-12 pb-6">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-6">
+      <Container>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-10">
           {/* Brand & Contact Info */}
-          <div className="lg:col-span-4 space-y-4">
+          <div className="lg:col-span-3 space-y-4">
             <img
               src={socioLogo}
               alt="Socio.lk"
               className="h-7 sm:h-8 w-auto object-contain"
             />
 
-            <div className="space-y-2.5 text-xs sm:text-sm text-zinc-300">
+            <div className="space-y-2.5 text-xs sm:text-sm text-zinc-200">
+              <p className="flex items-center gap-2.5">
+                <Building2 size={15} className="text-blue-400 shrink-0" />
+                <span>SocioTech PVT</span>
+              </p>
               <p className="flex items-start gap-2.5">
                 <MapPin size={16} className="text-red-500 shrink-0 mt-0.5" />
                 <span>86/10 Inner Circular Road, Ratnapura, Sri Lanka</span>
@@ -101,7 +106,7 @@ export default function Footer() {
                   key={social.label}
                   href={social.href}
                   aria-label={social.label}
-                  className="w-8 h-8 rounded-lg bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 flex items-center justify-center text-zinc-300 hover:text-white transition-colors"
+                  className="w-8 h-8 rounded-lg bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 flex items-center justify-center text-zinc-200 hover:text-white transition-colors"
                 >
                   {social.icon}
                 </a>
@@ -114,7 +119,7 @@ export default function Footer() {
             <h3 className="text-xs font-bold tracking-wider uppercase text-white mb-3.5">
               SHOP
             </h3>
-            <ul className="space-y-2 text-xs sm:text-sm text-zinc-400">
+            <ul className="space-y-2 text-xs sm:text-sm text-zinc-300">
               {FOOTER_LINKS.shop.map((link) => (
                 <li key={link}>
                   <a href="#" className="hover:text-white transition-colors">
@@ -129,7 +134,7 @@ export default function Footer() {
             <h3 className="text-xs font-bold tracking-wider uppercase text-white mb-3.5">
               COMPANY
             </h3>
-            <ul className="space-y-2 text-xs sm:text-sm text-zinc-400">
+            <ul className="space-y-2 text-xs sm:text-sm text-zinc-300">
               {FOOTER_LINKS.company.map((link) => (
                 <li key={link}>
                   <a href="#" className="hover:text-white transition-colors">
@@ -140,11 +145,11 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div className="lg:col-span-1">
+          <div className="lg:col-span-2">
             <h3 className="text-xs font-bold tracking-wider uppercase text-white mb-3.5">
               SUPPORT
             </h3>
-            <ul className="space-y-2 text-xs sm:text-sm text-zinc-400">
+            <ul className="space-y-2 text-xs sm:text-sm text-zinc-300">
               {FOOTER_LINKS.support.map((link) => (
                 <li key={link}>
                   <a href="#" className="hover:text-white transition-colors">
@@ -160,7 +165,7 @@ export default function Footer() {
             <h3 className="text-xs font-bold tracking-wider uppercase text-white mb-3">
               STAY UPDATED
             </h3>
-            <p className="text-xs text-zinc-400 leading-relaxed mb-3.5">
+            <p className="text-xs text-zinc-300 leading-relaxed mb-3.5">
               Get exclusive deals and new arrivals straight to your inbox.
             </p>
             <form
@@ -173,7 +178,7 @@ export default function Footer() {
                 value={newsletterEmail}
                 onChange={(e) => setNewsletterEmail(e.target.value)}
                 placeholder="Your email address"
-                className="flex-1 min-w-0 px-3 py-2 text-xs sm:text-sm rounded-lg bg-zinc-900 border border-zinc-800 text-white placeholder:text-zinc-500 focus:outline-none focus:border-blue-500"
+                className="flex-1 min-w-0 px-3 py-2 text-xs sm:text-sm rounded-lg bg-zinc-900 border border-white/45 text-white placeholder:text-zinc-400 focus:outline-none focus:border-blue-400"
               />
               <Button
                 type="submit"
@@ -196,23 +201,23 @@ export default function Footer() {
         </div>
 
         {/* Bottom Copyright Bar */}
-        <div className="border-t border-zinc-800/80 mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-zinc-500">
-          <p className="sm:mx-auto lg:ml-auto lg:mr-0">
+        <div className="border-t border-white/30 mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+          <p className="text-zinc-100">
             © 2026 Socio.lk Dev Team. All rights reserved.
           </p>
-          <div className="flex items-center gap-5 lg:ml-auto">
-            <a href="#" className="hover:text-zinc-300 transition-colors">
+          <div className="flex items-center gap-5 text-zinc-200">
+            <a href="#" className="hover:text-white transition-colors">
               Privacy
             </a>
-            <a href="#" className="hover:text-zinc-300 transition-colors">
+            <a href="#" className="hover:text-white transition-colors">
               Terms
             </a>
-            <a href="#" className="hover:text-zinc-300 transition-colors">
+            <a href="#" className="hover:text-white transition-colors">
               Cookies
             </a>
           </div>
         </div>
-      </div>
+      </Container>
     </footer>
   );
 }

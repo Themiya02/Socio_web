@@ -1,4 +1,5 @@
 import { Truck, ShieldCheck, Gift } from "lucide-react";
+import Container from "../../common/Container";
 
 const TRUST_ITEMS = [
   {
@@ -20,28 +21,27 @@ const TRUST_ITEMS = [
 
 export default function TrustBar() {
   return (
-    <section
-      id="trust-features"
-      className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 sm:mt-8"
-    >
-      <div className="bg-slate-50/90 rounded-2xl sm:rounded-3xl p-4 sm:p-6 grid grid-cols-1 md:grid-cols-3 gap-4">
-        {TRUST_ITEMS.map((item) => (
-          <div
-            key={item.title}
-            className="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-100 flex items-center gap-4"
-          >
-            <div className="w-11 h-11 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
-              {item.icon}
+    <section id="trust-features" className="mt-6 sm:mt-8">
+      <Container>
+        <div className="bg-slate-50/90 rounded-2xl sm:rounded-3xl p-4 sm:p-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+          {TRUST_ITEMS.map((item) => (
+            <div
+              key={item.title}
+              className="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-100 flex items-center gap-4"
+            >
+              <div className="w-11 h-11 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+                {item.icon}
+              </div>
+              <div>
+                <h3 className="text-sm font-bold text-slate-900">{item.title}</h3>
+                <p className="text-xs text-slate-500 mt-0.5 leading-snug">
+                  {item.subtitle}
+                </p>
+              </div>
             </div>
-            <div>
-              <h3 className="text-sm font-bold text-slate-900">{item.title}</h3>
-              <p className="text-xs text-slate-500 mt-0.5 leading-snug">
-                {item.subtitle}
-              </p>
-            </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      </Container>
     </section>
   );
 }
