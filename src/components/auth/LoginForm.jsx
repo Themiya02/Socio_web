@@ -1,10 +1,13 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import InputField from "../ui/InputField";
 import Button from "../common/Button";
 import IconButton from "../common/IconButton";
 import { validateLoginField, validateLoginForm } from "../../utils/validation";
 
 export default function LoginForm({ onSwitchToSignup, onForgotPassword }) {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -50,10 +53,12 @@ export default function LoginForm({ onSwitchToSignup, onForgotPassword }) {
     if (Object.keys(validationErrors).length > 0) return;
 
     console.log("Valid Login Submitted:", formData);
+    // Redirect to authenticated HomePage after valid submission
+    navigate("/home");
   };
 
   return (
-    <div className="p-5 sm:p-6  bg-white dark:bg-slate-900 transition-colors duration-300">
+    <div className="p-5 sm:p-6 bg-white dark:bg-slate-900 transition-colors duration-300">
       {/* Title & Subtitle */}
       <div className="text-center mb-4 sm:mb-5">
         <h1 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
@@ -106,13 +111,12 @@ export default function LoginForm({ onSwitchToSignup, onForgotPassword }) {
           </label>
 
           <button
-              type="button"
-              onClick={onForgotPassword}
-               className="text-xs font-medium text-blue-600 dark:text-blue-400 hover:underline cursor-pointer"
->
+            type="button"
+            onClick={onForgotPassword}
+            className="text-xs font-medium text-blue-600 dark:text-blue-400 hover:underline cursor-pointer"
+          >
             Forgot password?
           </button>
-          
         </div>
 
         <div className="pt-1">
@@ -132,7 +136,10 @@ export default function LoginForm({ onSwitchToSignup, onForgotPassword }) {
       {/* Continue with Google Button */}
       <IconButton
         label="Continue with Google"
-        onClick={() => console.log("Continue with Google Clicked")}
+        onClick={() => {
+          console.log("Continue with Google Clicked");
+          navigate("/home");
+        }}
       />
 
       {/* Footer Link */}
