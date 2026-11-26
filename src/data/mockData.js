@@ -146,3 +146,8 @@ export const TESTIMONIALS = [
     avatar: avatarKasun,
   },
 ];
+
+export const NEW_ARRIVALS = FLASH_OFFERS.map((item, index) => ({
+  ...item,
+  id: `new-arrival-${index + 1}`,
+}));
