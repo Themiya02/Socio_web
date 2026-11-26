@@ -4,12 +4,14 @@ import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import HomePage from "./pages/HomePage";
 import CartPage from "./pages/CartPage";
+import ShopPage from "./pages/ShopPage";
 
 function AppRoutes() {
   const navigate = useNavigate();
 
   return (
     <Routes>
+      <Route path="/shop" element={<ShopPage />} />
       <Route path="/cart" element={<CartPage />} />
       <Route path="/home" element={<HomePage />} />
       <Route path="/" element={<LandingPage />} />

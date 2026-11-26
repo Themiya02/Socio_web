@@ -31,11 +31,11 @@ export default function AuthNavbar({
   const location = useLocation();
 
   const navLinks = [
-    { label: "Home", path: "/home", sectionId: "top" },
-    { label: "Shop", path: "/home", sectionId: "new-arrivals" },
-    { label: "Features", path: "/home", sectionId: "trust-features" },
-    { label: "Support", path: null, sectionId: "footer" },
-  ];
+  { label: "Home", path: "/home", sectionId: "top" },
+  { label: "Shop", path: "/shop", sectionId: null },
+  { label: "Features", path: "/home", sectionId: "trust-features" },
+  { label: "Support", path: null, sectionId: "footer" },
+];
 
   // Close user profile dropdown when clicking outside
   useEffect(() => {
@@ -53,18 +53,23 @@ export default function AuthNavbar({
   }, []);
 
   const handleNavClick = (item) => {
-    setMobileMenuOpen(false);
+  setMobileMenuOpen(false);
 
-    if (!item.path || location.pathname === item.path) {
-      const target = document.getElementById(item.sectionId);
-      if (target) {
-        target.scrollIntoView({ behavior: "smooth" });
-      }
-      return;
-    }
-
+  if (!item.sectionId && item.path) {
     navigate(item.path);
-  };
+    return;
+  }
+
+  if (!item.path || location.pathname === item.path) {
+    const target = document.getElementById(item.sectionId);
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth" });
+    }
+    return;
+  }
+
+  navigate(item.path);
+};
 
   const handleLogout = () => {
     setProfileMenuOpen(false);
@@ -243,7 +248,11 @@ export default function AuthNavbar({
                 key={item.label}
                 type="button"
                 onClick={() => handleNavClick(item)}
-                className="py-1.5 text-sm font-medium text-slate-700 hover:text-blue-600 cursor-pointer"
+                className={`transition-colors cursor-pointer ${
+  item.path && location.pathname === item.path && (!item.sectionId || item.sectionId === "top")
+    ? "text-blue-600 font-semibold"
+    : "hover:text-blue-600"
+}`}
               >
                 {item.label}
               </button>
