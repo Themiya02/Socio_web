@@ -151,3 +151,61 @@ export const NEW_ARRIVALS = FLASH_OFFERS.map((item, index) => ({
   ...item,
   id: `new-arrival-${index + 1}`,
 }));
+
+export const INITIAL_CART_ITEMS = [
+  {
+    id: "cart-anker-735",
+    name: "Anker 735 Nano II Charger",
+    variant: "Power & Charging • Space Gray, 100W",
+    price: 12500,
+    quantity: 1,
+    image: ankerImg,
+    brand: "Anker",
+    category: "GaN Chargers",
+    onSale: true,
+    inStock: true,
+  },
+  {
+    id: "cart-sony-xm5",
+    name: "Sony WH-1000XM5",
+    variant: "Audio • Black",
+    price: 95000,
+    quantity: 1,
+    image: catHeadphonesImg,
+    brand: "Sony",
+    category: "Earbuds",
+    onSale: false,
+    inStock: true,
+  },
+];
+
+export const FREQUENTLY_BOUGHT_ITEMS = [
+  {
+    id: "upsell-magsafe-case",
+    name: "Clear MagSafe Case",
+    variant: "Accessories • Clear",
+    price: 3200,
+    image: catPhonesImg,
+  },
+  {
+    id: "upsell-tempered-glass",
+    name: "Tempered Glass",
+    variant: "Screen Protectors • 9H",
+    price: 1500,
+    image: catPhonesImg,
+  },
+  {
+    id: "upsell-usbc-cable",
+    name: "USB-C Cable (2m)",
+    variant: "Cables • Braided 100W",
+    price: 2800,
+    image: catAccessoriesImg,
+  },
+  {
+    id: "upsell-airtag",
+    name: "Apple AirTag",
+    variant: "Accessories • Single Pack",
+    price: 10500,
+    image: catAccessoriesImg,
+  },
+];

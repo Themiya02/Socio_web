@@ -21,7 +21,6 @@ export default function Navbar({ cartCount = 3 }) {
   return (
     <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-[0_2px_10px_rgba(15,23,42,0.06)]">
       <Container className="relative h-16 sm:h-[70px] flex items-center justify-between gap-4">
-
         {/* Brand Logo Group: Public Icon + Black Wordmark + Slogan */}
         <Link to="/" className="shrink-0 flex items-center gap-2.5">
           <img
@@ -74,6 +73,7 @@ export default function Navbar({ cartCount = 3 }) {
 
           <button
             type="button"
+            onClick={() => navigate("/cart")}
             aria-label="Shopping Cart"
             className="relative p-2 rounded-lg text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
           >

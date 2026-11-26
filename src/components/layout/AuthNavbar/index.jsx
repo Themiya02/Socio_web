@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import {
   Search,
   ShoppingCart,
@@ -28,12 +28,13 @@ export default function AuthNavbar({
   const [searchQuery, setSearchQuery] = useState("");
   const profileMenuRef = useRef(null);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const navLinks = [
-    { label: "Home", href: "#top" },
-    { label: "Shop", href: "#new-arrivals" },
-    { label: "Features", href: "#trust-features" },
-    { label: "Support", href: "#footer" },
+    { label: "Home", path: "/home", sectionId: "top" },
+    { label: "Shop", path: "/home", sectionId: "new-arrivals" },
+    { label: "Features", path: "/home", sectionId: "trust-features" },
+    { label: "Support", path: null, sectionId: "footer" },
   ];
 
   // Close user profile dropdown when clicking outside
@@ -51,11 +52,27 @@ export default function AuthNavbar({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  const handleNavClick = (item) => {
+    setMobileMenuOpen(false);
+
+    if (!item.path || location.pathname === item.path) {
+      const target = document.getElementById(item.sectionId);
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth" });
+      }
+      return;
+    }
+
+    navigate(item.path);
+  };
+
   const handleLogout = () => {
     setProfileMenuOpen(false);
     setMobileMenuOpen(false);
     navigate("/login");
   };
+
+  const isCartPage = location.pathname === "/cart";
 
   return (
     <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-[0_2px_10px_rgba(15,23,42,0.06)]">
@@ -84,13 +101,14 @@ export default function AuthNavbar({
         {/* Center Navigation Links */}
         <nav className="hidden md:flex items-center gap-6 lg:gap-9 text-sm font-medium text-slate-700">
           {navLinks.map((item) => (
-            <a
+            <button
               key={item.label}
-              href={item.href}
-              className="hover:text-blue-600 transition-colors"
+              type="button"
+              onClick={() => handleNavClick(item)}
+              className="hover:text-blue-600 transition-colors cursor-pointer"
             >
               {item.label}
-            </a>
+            </button>
           ))}
         </nav>
 
@@ -112,8 +130,13 @@ export default function AuthNavbar({
 
           <button
             type="button"
+            onClick={() => navigate("/cart")}
             aria-label="Shopping Cart"
-            className="relative p-2 rounded-lg text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
+            className={`relative p-2 rounded-lg transition-colors cursor-pointer ${
+              isCartPage
+                ? "bg-blue-50 text-blue-600"
+                : "text-slate-700 hover:bg-slate-100"
+            }`}
           >
             <ShoppingCart size={20} />
             {cartCount > 0 && (
@@ -214,16 +237,16 @@ export default function AuthNavbar({
             />
           </div>
 
-          <nav className="flex flex-col gap-2">
+          <nav className="flex flex-col gap-2 items-start">
             {navLinks.map((item) => (
-              <a
+              <button
                 key={item.label}
-                href={item.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className="py-1.5 text-sm font-medium text-slate-700 hover:text-blue-600"
+                type="button"
+                onClick={() => handleNavClick(item)}
+                className="py-1.5 text-sm font-medium text-slate-700 hover:text-blue-600 cursor-pointer"
               >
                 {item.label}
-              </a>
+              </button>
             ))}
           </nav>
         </div>
