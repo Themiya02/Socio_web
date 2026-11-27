@@ -146,14 +146,22 @@ export default function Footer() {
                     >
                       {link}
                     </Link>
-                  ) : (
-                    <a href="#" className="hover:text-white transition-colors">
-                      {link}
-                    </a>
-                  )}
-                </li>
-              ))}
-            </ul>
+                  ) : link === "Contact us" ? (
+        <Link
+          to="/contact"
+          onClick={() => window.scrollTo(0, 0)}
+          className="hover:text-white transition-colors"
+        >
+          {link}
+        </Link>
+      ) : (
+        <a href="#" className="hover:text-white transition-colors">
+          {link}
+        </a>
+      )}
+    </li>
+  ))}
+</ul>
           </div>
 
           <div className="lg:col-span-2">

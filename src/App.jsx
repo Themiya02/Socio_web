@@ -6,12 +6,14 @@ import HomePage from "./pages/HomePage";
 import CartPage from "./pages/CartPage";
 import ShopPage from "./pages/ShopPage";
 import AboutPage from "./pages/AboutPage";
+import ContactPage from "./pages/ContactPage";
 
 function AppRoutes() {
   const navigate = useNavigate();
 
   return (
     <Routes>
+      <Route path="/contact" element={<ContactPage />} />
       <Route path="/about" element={<AboutPage />} />
       <Route path="/shop" element={<ShopPage />} />
       <Route path="/cart" element={<CartPage />} />
