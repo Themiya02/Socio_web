@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Building2, MapPin, Phone, Mail } from "lucide-react";
 import socioLogo from "../../../assets/icons/socio-logo.webp";
 import { FOOTER_LINKS } from "../../../data/mockData";
@@ -137,9 +138,19 @@ export default function Footer() {
             <ul className="space-y-2 text-xs sm:text-sm text-zinc-300">
               {FOOTER_LINKS.company.map((link) => (
                 <li key={link}>
-                  <a href="#" className="hover:text-white transition-colors">
-                    {link}
-                  </a>
+                  {link === "About Us" ? (
+                    <Link
+                      to="/about"
+                      onClick={() => window.scrollTo(0, 0)}
+                      className="hover:text-white transition-colors"
+                    >
+                      {link}
+                    </Link>
+                  ) : (
+                    <a href="#" className="hover:text-white transition-colors">
+                      {link}
+                    </a>
+                  )}
                 </li>
               ))}
             </ul>
